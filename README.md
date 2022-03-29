@@ -8,7 +8,7 @@ services:
 
   paper:
     container_name: paper
-    image: ghcr.io/iamtakagi/paper
+    image: ghcr.io/takagi-minecraft-lab/paper
     volumes:
       - ./paper:/app
     tty: true
