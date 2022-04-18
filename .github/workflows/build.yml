@@ -9,7 +9,7 @@ on:
 
 env:
   DOCKER_REGISTRY_NAME: ghcr.io
-  DOCKER_IMAGE_NAME: ${{ github.repository }} # takagi-minecraft-lab/paper
+  DOCKER_IMAGE_NAME: ${{ github.repository }} # {username|org}/waterfall
 
 jobs:
   build:
