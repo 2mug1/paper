@@ -9,7 +9,8 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_BASE_NAME: ghcr.io/takagi-minecraft-lab/paper
+  DOCKER_REGISTRY_NAME: ghcr.io
+  DOCKER_IMAGE_NAME: ${{ github.repository }} # takagi-minecraft-lab/paper
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
       - name: Login to Registry
         uses: docker/login-action@v1 
         with:
-          registry: ghcr.io
+          registry: ${{ env.DOCKER_REGISTRY_NAME }}
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
 
@@ -35,6 +36,6 @@ jobs:
           DOCKER_BUILDKIT: 1
         with:
           push: ${{ github.ref == 'refs/heads/master' }}
-          tags: ${{ env.DOCKER_BASE_NAME }}:latest
-          cache-from: ${{ env.DOCKER_BASE_NAME }}:latest
+          tags: ${{ env.DOCKER_REGISTRY_NAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          cache-from: ${{ env.DOCKER_REGISTRY_NAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
           build-args: BUILDKIT_INLINE_CACHE=1
